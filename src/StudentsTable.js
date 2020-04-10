@@ -6,6 +6,7 @@ import ModalDelete from "./components/ModalDelete";
 // import {withRouter} from "react-router";
 
 // import StudentInfo from 'StudentInfo';
+import "./StudentTable.css"
 
 function TableHeader() {
     return (
@@ -16,6 +17,7 @@ function TableHeader() {
             <th>Second Name</th>
             <th>Year</th>
             <th>Delete</th>
+            <th>Edit</th>
         </tr>
         </thead>
     );
@@ -25,12 +27,17 @@ function TableRow(props) {
     return (<tr>
             <td>{props.student.id}</td>
             <td>{props.student.firstName}</td>
-            <td>{props.student.secondName}</td>
-            <td>{props.student.age}</td>
+            <td>{props.student.lastName}</td>
+            <td>{props.student.year}</td>
             <td>
                 <a href="/delete" onClick={() =>
                     props.onDelete(props.student)}
                 >delete</a>
+            </td>
+            <td>
+                <a href="/edit" onClick={() =>
+                    props.edit(props.student)}
+                >edit</a>
             </td>
         </tr>
     )

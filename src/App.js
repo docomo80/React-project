@@ -7,17 +7,20 @@ import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 import StudentInfo from './StudentInfo';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ModalDelete from './components/ModalDelete';
+
 // import axios from 'axios';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            student: {},
             selectedStudent: null,
             showDeleteModal: false,
-            students: []
+            // students: []
         };
         this.deleteStudent = this.deleteStudent.bind(this);
+        this.selectedStudent = this.selectedStudent.bind(this);
     }
 
     // to do
@@ -28,25 +31,29 @@ class App extends React.Component {
     deleteStudent = (student) => {
         this.setState({
             showDeleteModal: true,
-            selectedStudent: student
+            student: student
         });
     };
 
-    deleteConfirmed = () => {
-        const new_arr =
-            this.state.students.filter(s =>
-                s.id !== this.state.selectedStudent.id);
-
-        this.setState({students: new_arr});
-        this.onHide();
+    editStudent = (student) => {
+        // this.setState({editStudent: student});
     };
+
+    // deleteConfirmed = () => {
+    //     const new_arr =
+    //         this.state.students.filter(s =>
+    //             s.id !== this.state.selectedStudent.id);
+    //
+    //     this.setState({students: new_arr});
+    //     this.onHide();
+    // };
 
     hideModal = () => {
         this.setState({showDeleteModal: false});
     };
 
     selectedStudent() {
-        this.setState({student: this.state.selectedStudent});
+        this.setState({student: this.state});
     }
 
     // addStudent = (student) => {
@@ -92,19 +99,20 @@ class App extends React.Component {
                                 // onAdd={this.addStudent}
                             />
                         </Route>
-                        <Route exact path='/'>
+                        <Route exact path="/">
                             <StudentsTable
-                                students={this.state.students}
+                                // students={this.state.students}
                                 onDelete={this.deleteStudent}
-                                // student={this.selectedStudent}
+                                // edit={this.editStudent}
+                                // // student={this.selectedStudent}
                             />
                         </Route>
-                        <Route exact path='/delete'>
+                        <Route path="/delete">
                             <ModalDelete
-                                show={this.state.showDeleteModel}
-                                onConfirm={this.deleteConfirmed}
+                                show={this.showDeleteModel}
+                                // onConfirm={this.deleteConfirmed}
                                 onHide={this.hideModal}
-                                student={this.state.selectedStudent}
+                                student={this.state.student}
                                 // onDelete={this.deleteStudent}
                             />
                         </Route>

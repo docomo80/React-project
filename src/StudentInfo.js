@@ -2,6 +2,7 @@ import React from 'react';
 import LabelText from './LabelText';
 import {withRouter} from 'react-router';
 import axios from 'axios';
+import  "./StudentInfo.css"
 
 class StudentInfo extends React.Component {
     constructor(props) {
